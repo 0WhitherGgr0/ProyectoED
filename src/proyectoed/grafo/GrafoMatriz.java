@@ -1,38 +1,40 @@
 package proyectoed.grafo;
 
-public class GrafoMatriz {
+public class GrafoMatriz<T> {
 
-    int numVerts;
-    static int MaxVerts = 20;
-    Vertice[] verts;
-    int[][] matAd;
+    private int numVerts;
+    private static final int MAX_VERTS = 20;
+    private Vertice<T>[] verts;
+    private int[][] matAd;
 
+    @SuppressWarnings("unchecked")
     public GrafoMatriz() {
-        this(MaxVerts);
+        this(MAX_VERTS);
     }
 
-    public GrafoMatriz(int mx) {
-        matAd = new int[mx][mx];
-        verts = new Vertice[mx];
-        for (int i = 0; i < mx; i++) {
-            for (int j = 0; j < mx; j++) {
+    @SuppressWarnings("unchecked")
+    public GrafoMatriz(int maxVerts) {
+        matAd = new int[maxVerts][maxVerts];
+        verts = (Vertice<T>[]) new Vertice[maxVerts];
+        for (int i = 0; i < maxVerts; i++) {
+            for (int j = 0; j < maxVerts; j++) {
                 matAd[i][j] = 0;
             }
         }
         numVerts = 0;
     }
 
-    public void nuevoVertice(String nom) {
+    public void nuevoVertice(T nom) {
         boolean esta = numVertice(nom) >= 0;
         if (!esta) {
-            Vertice v = new Vertice(nom);
+            Vertice<T> v = new Vertice<>(nom);
             v.asigVert(numVerts);
             verts[numVerts++] = v;
         }
     }
 
-    public int numVertice(String vs) {
-        Vertice v = new Vertice(vs);
+    public int numVertice(T nom) {
+        Vertice<T> v = new Vertice<>(nom);
         boolean encontrado = false;
         int i = 0;
         for (; (i < numVerts) && !encontrado;) {
@@ -43,28 +45,10 @@ public class GrafoMatriz {
         return (i < numVerts) ? i : -1;
     }
 
-    public void nuevoArco(String a, String b) throws Exception {
-        int va, vb;
-        va = numVertice(a);
-        vb = numVertice(b);
-        if (va < 0 || vb < 0)
-            throw new Exception("Vértice no existe");
-        matAd[va][vb] = 1;
-    }
-
     public void nuevoArco(int va, int vb) throws Exception {
         if (va < 0 || vb < 0 || va >= numVerts || vb >= numVerts)
             throw new Exception("Vértice no existe");
         matAd[va][vb] = 1;
-    }
-
-    public boolean adyacente(String a, String b) throws Exception {
-        int va, vb;
-        va = numVertice(a);
-        vb = numVertice(b);
-        if (va < 0 || vb < 0)
-            throw new Exception("Vértice no existe");
-        return matAd[va][vb] == 1;
     }
 
     public boolean adyacente(int va, int vb) throws Exception {

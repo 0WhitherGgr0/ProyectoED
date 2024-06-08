@@ -1,33 +1,28 @@
 package proyectoed.grafo;
 
-public class Vertice {
+public class Vertice<T> {
 
-	String nombre;
-	int numVertice;
+    private T nombre;
+    private int numVertice;
 
-	public Vertice(String x) {
-		nombre = x;
-		numVertice = -1;
-	}
+    public Vertice(T nombre) {
+        this.nombre = nombre;
+        this.numVertice = -1;
+    }
 
-	public String nomVertice() // devuelve identificador del vértice
-	{
-		return nombre;
-	}
+    public T nomVertice() {
+        return nombre;
+    }
 
-	public boolean equals(Vertice n) // true, si dos vértices son iguales
-	{
-		return nombre.equals(n.nombre);
-	}
+    public boolean equals(Vertice<T> n) {
+        return nombre.equals(n.nombre);
+    }
 
-	public void asigVert(int n) // establece el número de vértices
-	{
-		numVertice = n;
-	}
+    public void asigVert(int n) {
+        numVertice = n;
+    }
 
-	public String toString() // características del vértice
-	{
-		return nombre + " (" + numVertice + ")";
-	}
-
+    public String toString() {
+        return nombre + " (" + numVertice + ")";
+    }
 }
