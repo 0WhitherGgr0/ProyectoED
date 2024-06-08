@@ -10,12 +10,12 @@ class GrafMatPesoTest {
 	void testGrafMatPeso() {
 		 GrafMatPeso grafo = new GrafMatPeso(4);
 		 assertNotNull(grafo);
-	     assertEquals(0, grafo.matPeso[0][0]);
-	     assertEquals(0, grafo.matPeso[1][1]);
-	     assertEquals(0, grafo.matPeso[2][2]);
-	     assertEquals(0, grafo.matPeso[3][3]);
-	     assertEquals(Integer.MAX_VALUE, grafo.matPeso[0][1]);
-	     assertEquals(Integer.MAX_VALUE, grafo.matPeso[1][2]);
+	     assertEquals(0, grafo.getMatPeso()[0][0]);
+	     assertEquals(0, grafo.getMatPeso()[1][1]);
+	     assertEquals(0, grafo.getMatPeso()[2][2]);
+	     assertEquals(0, grafo.getMatPeso()[3][3]);
+	     assertEquals(Integer.MAX_VALUE, grafo.getMatPeso()[0][1]);
+	     assertEquals(Integer.MAX_VALUE, grafo.getMatPeso()[1][2]);
 	}
 
 	@Test
@@ -28,16 +28,16 @@ class GrafMatPesoTest {
 	void testGetMatPeso() {
 		GrafMatPeso grafo = new GrafMatPeso(4);
 		assertNotNull(grafo.getMatPeso());
-		assertTrue(grafo.matPeso==grafo.getMatPeso());
+		assertTrue(grafo.getMatPeso()==grafo.getMatPeso());
 	}
 
 	@Test
 	void testSetPeso() {
 		GrafMatPeso grafo = new GrafMatPeso(4);
 		grafo.setPeso(2,3,8);
-		assertEquals(8, grafo.matPeso[2][3]);
+		assertEquals(8, grafo.getMatPeso()[2][3]);
 		grafo.setPeso(3,0,5);
-		assertEquals(5, grafo.matPeso[3][0]);
+		assertEquals(5, grafo.getMatPeso()[3][0]);
 		 
 	}
 
