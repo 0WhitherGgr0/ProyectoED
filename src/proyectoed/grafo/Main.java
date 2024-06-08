@@ -3,7 +3,7 @@ package proyectoed.grafo;
 public class Main {
     public static void main(String[] args) {
         // Crear un grafo ponderado
-        GrafMatPeso<String> grafo = new GrafMatPeso<>(5);
+        GrafMatPeso grafo = new GrafMatPeso(5);
 
         // Agregar vértices
         grafo.setPeso(0, 1, 2); // Agregar aristas con pesos
@@ -15,7 +15,7 @@ public class Main {
         grafo.setPeso(3, 4, 7);
 
         // Crear un árbol de expansión mínima usando el algoritmo de Prim
-        ArbolExpansionMinimo<String> mst = new ArbolExpansionMinimo<>(grafo);
+        ArbolExpansionMinimo mst = new ArbolExpansionMinimo(grafo);
         int costoTotal = mst.arbolExpansionPrim();
         System.out.println("Costo total del MST: " + costoTotal);
     }

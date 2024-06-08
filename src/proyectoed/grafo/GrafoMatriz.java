@@ -1,13 +1,12 @@
 package proyectoed.grafo;
 
-public class GrafoMatriz<T> {
-
+public class GrafoMatriz<T> { //Acá si se usa T
+	//Agregué varios getters
     private int numVerts;
     private static final int MAX_VERTS = 20;
     private Vertice<T>[] verts;
     private int[][] matAd;
 
-    @SuppressWarnings("unchecked")
     public GrafoMatriz() {
         this(MAX_VERTS);
     }
@@ -22,6 +21,18 @@ public class GrafoMatriz<T> {
             }
         }
         numVerts = 0;
+    }
+    
+    public int getNumVerts() {
+    	return numVerts;
+    }
+    
+    public Vertice<T>[] getVerts() {
+    	return verts;
+    }
+    
+    public int[][] getMatAd(){
+    	return matAd;
     }
 
     public void nuevoVertice(T nom) {
@@ -45,12 +56,24 @@ public class GrafoMatriz<T> {
         return (i < numVerts) ? i : -1;
     }
 
+    public void nuevoArco(T va, T vb) throws Exception { //Lo cambie a T ya que ese el el tipo de dato que usan los vertices
+    	int na = numVertice(va);
+    	int nb = numVertice(vb);
+    	nuevoArco(na, nb);
+    }
+    
     public void nuevoArco(int va, int vb) throws Exception {
-        if (va < 0 || vb < 0 || va >= numVerts || vb >= numVerts)
+    	if (va < 0 || vb < 0 || va >= numVerts || vb >= numVerts)
             throw new Exception("Vértice no existe");
         matAd[va][vb] = 1;
     }
 
+    public boolean adyacente(T va, T vb) throws Exception {
+    	int na = numVertice(va);
+    	int nb = numVertice(vb);
+    	return adyacente(na, nb);
+    }
+    
     public boolean adyacente(int va, int vb) throws Exception {
         if (va < 0 || vb < 0 || va >= numVerts || vb >= numVerts)
             throw new Exception("Vértice no existe");

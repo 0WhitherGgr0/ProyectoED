@@ -1,14 +1,18 @@
 package proyectoed.grafo;
 
-public class ArbolExpansionMinimo<T> {
+public class ArbolExpansionMinimo { //Aquí tambien retiré T
     private int[][] pesos;
     private int n;
 
-    public ArbolExpansionMinimo(GrafMatPeso<T> gp) {
+    public ArbolExpansionMinimo(GrafMatPeso gp) {
         n = gp.numeroDeVertices();
         pesos = gp.getMatPeso();
     }
 
+    public int[][] getPesos() {
+    	return pesos;
+    }
+    
     public int arbolExpansionPrim() {
         int longMin, menor;
         int z;

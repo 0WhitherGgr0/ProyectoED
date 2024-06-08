@@ -18,8 +18,8 @@ class ArbolExpansionMinimoTest {
          
         // Validar que el constructor inicializa correctamente los atributos
         assertNotNull(arbol);
-        assertEquals(4, arbol.Pesos.length);
-        assertEquals(4, arbol.Pesos[0].length);
+        assertEquals(4, arbol.getPesos().length);
+        assertEquals(4, arbol.getPesos()[0].length);
     }
    
     @Test
