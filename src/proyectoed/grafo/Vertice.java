@@ -1,6 +1,6 @@
 package proyectoed.grafo;
 
-public class Vertice<T> { //En esta clase si aparece T como tipo de dato
+public class Vertice<T> { 
 
     private T nombre;
     private int numVertice;

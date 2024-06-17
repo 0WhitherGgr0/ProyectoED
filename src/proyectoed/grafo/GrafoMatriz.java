@@ -1,7 +1,6 @@
 package proyectoed.grafo;
 
-public class GrafoMatriz<T> { //Acá si se usa T
-	//Agregué varios getters
+public class GrafoMatriz<T> { 
     private int numVerts;
     private static final int MAX_VERTS = 20;
     private Vertice<T>[] verts;

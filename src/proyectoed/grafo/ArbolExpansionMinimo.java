@@ -1,6 +1,6 @@
 package proyectoed.grafo;
 
-public class ArbolExpansionMinimo { //Aquí tambien retiré T
+public class ArbolExpansionMinimo { 
     private int[][] pesos;
     private int n;
 

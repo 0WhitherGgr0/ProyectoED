@@ -1,6 +1,6 @@
 package proyectoed.grafo;
 
-public class GrafMatPeso { //Retiré la T ya que no se usa en la clase
+public class GrafMatPeso {
     public static final int INFINITO = Integer.MAX_VALUE;
     private int[][] matPeso;
     private int numVertices;
