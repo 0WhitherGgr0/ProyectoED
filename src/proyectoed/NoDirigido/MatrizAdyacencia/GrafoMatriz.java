@@ -7,12 +7,14 @@ public class GrafoMatriz {
     private Vertice[] verts;
     private int[][] matPeso;
     private static final int INFINITO = Integer.MAX_VALUE;
+    private StringBuilder resultado;
 
     public GrafoMatriz(int maxVerts) {
         this.maxVerts = maxVerts;
         this.numVerts = 0;
         this.verts = new Vertice[maxVerts];
         this.matPeso = new int[maxVerts][maxVerts];
+        resultado = new StringBuilder();
 
         // Inicializar la matriz de pesos con infinito
         for (int i = 0; i < maxVerts; i++) {
@@ -74,19 +76,26 @@ public class GrafoMatriz {
             throw new IllegalArgumentException("El vértice no existe.");
         }
 
-        // Eliminar de la matriz de adyacencia
+        // Desplazar las filas de la matriz de adyacencia
         for (int i = idx; i < numVerts - 1; i++) {
             for (int j = 0; j < numVerts; j++) {
                 matPeso[i][j] = matPeso[i + 1][j];
             }
         }
+        // Desplazar las columnas de la matriz de adyacencia
         for (int j = idx; j < numVerts - 1; j++) {
             for (int i = 0; i < numVerts; i++) {
                 matPeso[i][j] = matPeso[i][j + 1];
             }
         }
 
-        // Eliminar de la lista de vértices
+        // Restablecer la última fila y columna
+        for (int i = 0; i < numVerts; i++) {
+            matPeso[numVerts - 1][i] = INFINITO;
+            matPeso[i][numVerts - 1] = INFINITO;
+        }
+
+        // Desplazar la lista de vértices
         for (int i = idx; i < numVerts - 1; i++) {
             verts[i] = verts[i + 1];
         }
@@ -95,7 +104,7 @@ public class GrafoMatriz {
         numVerts--;
     }
 
-    public void imprimirGrafo() {
+    public void imprimirConsolaGrafo() {
         System.out.println("Matriz de Adyacencia:");
         for (int i = 0; i < numVerts; i++) {
             for (int j = 0; j < numVerts; j++) {
@@ -114,6 +123,34 @@ public class GrafoMatriz {
         System.out.println();
     }
 
+    // ******************************Segundo cambio**********************************
+
+    public String imprimirStringGrafo() {
+        resultado.setLength(0); // Clear previous results
+        resultado.append("\nMatriz de Adyacencia:\n");
+        for (int i = 0; i < numVerts; i++) {
+            for (int j = 0; j < numVerts; j++) {
+                if (matPeso[i][j] == INFINITO) {
+                    resultado.append("∞ ");
+                } else {
+                    resultado.append(matPeso[i][j]).append(" ");
+                }
+            }
+            resultado.append("\n");
+        }
+        resultado.append("\nVértices:\n\n");
+        for (int i = 0; i < numVerts; i++) {
+            resultado.append(verts[i].nomVertice()).append(" ");
+        }
+        resultado.append("\n");
+        return resultado.toString(); // Return the built string
+    }
+
+    public String getResultado() {
+        return resultado.toString();
+    }
+    
+    
     public int[][] getMatPeso() {
         return matPeso;
     }

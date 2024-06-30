@@ -5,7 +5,7 @@ public class Demo {
 	   public static void main(String[] args) {
 /*   		
  *			//Ejemplo de Recorrido 1  			
- 			GrafoMatriz grafo = new GrafoMatriz(6);
+ 			GrafoMatriz grafo = new GrafoMatriz(10);
 
 	        // Añadir vértices
 	        grafo.nuevoVertice("1");
@@ -58,7 +58,7 @@ public class Demo {
 		   		   
 	        // Imprimir el grafo
 	        System.out.println("Grafo representado con matriz de pesos:");
-	        grafo.imprimirGrafo();
+	        grafo.imprimirConsolaGrafo();
 
 	        // Encontrar el árbol de expansión mínima usando el algoritmo de Prim
 	        ArbolExpansionMinimo prim = new ArbolExpansionMinimo(grafo);
