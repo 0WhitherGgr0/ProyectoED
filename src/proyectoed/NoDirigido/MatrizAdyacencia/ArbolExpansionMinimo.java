@@ -16,7 +16,6 @@ public class ArbolExpansionMinimo {
 		Pesos = gp.getMatPeso();
 		aristasArbolExpansionMinimo = new ArrayList<>();
 		resultado = new StringBuilder();
-
 	}
 
 	// Getters
@@ -26,6 +25,10 @@ public class ArbolExpansionMinimo {
 
 	public String getResultado() {
 		return resultado.toString();
+	}
+	
+	public List<int[]> getAristasArbolExpansionMinimo() {
+		return aristasArbolExpansionMinimo;
 	}
 
 	// ******************************Primer cambio**********************************
@@ -74,7 +77,4 @@ public class ArbolExpansionMinimo {
 		return longMin;
 	}
 
-	public List<int[]> getAristasArbolExpansionMinimo() {
-		return aristasArbolExpansionMinimo;
-	}
 }

@@ -33,7 +33,7 @@ public class GrafoMatriz {
             verts[numVerts] = new Vertice(nombre);
             numVerts++;
         } else {
-            throw new IllegalArgumentException("Se ha alcanzado el número máximo de vértices.");
+            throw new IndexOutOfBoundsException("Se ha alcanzado el número máximo de vértices.");
         }
     }
 
@@ -42,7 +42,7 @@ public class GrafoMatriz {
         int vd = numVertice(destino);
 
         if (vi == -1 || vd == -1) {
-            throw new IllegalArgumentException("Uno o ambos nodos no existen.");
+            throw new IndexOutOfBoundsException("Uno o ambos nodos no existen.");
         }
 
         matPeso[vi][vd] = peso;
@@ -54,7 +54,7 @@ public class GrafoMatriz {
         int vd = numVertice(destino);
 
         if (vi == -1 || vd == -1) {
-            throw new IllegalArgumentException("Uno o ambos nodos no existen.");
+            throw new RuntimeException("Uno o ambos nodos no existen.");
         }
 
         matPeso[vi][vd] = INFINITO;
@@ -73,7 +73,7 @@ public class GrafoMatriz {
     public void eliminarVertice(String nombre) {
         int idx = numVertice(nombre);
         if (idx == -1) {
-            throw new IllegalArgumentException("El vértice no existe.");
+            throw new RuntimeException("El vértice no existe.");
         }
 
         // Desplazar las filas de la matriz de adyacencia
@@ -103,7 +103,8 @@ public class GrafoMatriz {
 
         numVerts--;
     }
-
+    
+    //Sin test, usado por otras clases
     public void imprimirConsolaGrafo() {
         System.out.println("Matriz de Adyacencia:");
         for (int i = 0; i < numVerts; i++) {
@@ -124,7 +125,7 @@ public class GrafoMatriz {
     }
 
     // ******************************Segundo cambio**********************************
-
+    
     public String imprimirStringGrafo() {
         resultado.setLength(0); // Clear previous results
         resultado.append("\nMatriz de Adyacencia:\n");
@@ -138,19 +139,10 @@ public class GrafoMatriz {
             }
             resultado.append("\n");
         }
-        resultado.append("\nVértices:\n\n");
-        for (int i = 0; i < numVerts; i++) {
-            resultado.append(verts[i].nomVertice()).append(" ");
-        }
-        resultado.append("\n");
         return resultado.toString(); // Return the built string
     }
-
-    public String getResultado() {
-        return resultado.toString();
-    }
     
-    
+    //Getters
     public int[][] getMatPeso() {
         return matPeso;
     }
@@ -166,6 +158,5 @@ public class GrafoMatriz {
     public static int getInfinito() {
         return INFINITO;
     }
-
 }
 
