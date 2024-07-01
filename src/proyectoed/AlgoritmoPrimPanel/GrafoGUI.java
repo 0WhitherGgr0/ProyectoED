@@ -41,128 +41,125 @@ public class GrafoGUI extends JFrame {
 		JButton actualizarGrafoBtn = new JButton("Actualizar Grafo");
 
 		agregarNodoBtn.addActionListener(new ActionListener() {
-		    @Override
-		    public void actionPerformed(ActionEvent e) {
-		        JTextField nombreNodoField = new JTextField();
-		        JTextField nodoConectarField = new JTextField();
-		        JTextField pesoField = new JTextField();
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JTextField nombreNodoField = new JTextField();
+				JTextField nodoConectarField = new JTextField();
+				JTextField pesoField = new JTextField();
 
-		        Object[] message = {
-		            "Nombre del nuevo nodo:", nombreNodoField,
-		            "Conectar a (nombre del nodo existente):", nodoConectarField,
-		            "Peso de la conexión:", pesoField
-		        };
+				Object[] message = { "Nombre del nuevo nodo:", nombreNodoField,
+						"Conectar a (nombre del nodo existente):", nodoConectarField, "Peso de la conexión:",
+						pesoField };
 
-		        int option = JOptionPane.showConfirmDialog(
-		            GrafoGUI.this, message, "Agregar Nodo y Conectar", JOptionPane.OK_CANCEL_OPTION);
+				int option = JOptionPane.showConfirmDialog(GrafoGUI.this, message, "Agregar Nodo y Conectar",
+						JOptionPane.OK_CANCEL_OPTION);
 
-		        if (option == JOptionPane.OK_OPTION) {
-		            String nombreNodo = nombreNodoField.getText().trim();
-		            String nodoConectar = nodoConectarField.getText().trim();
-		            String pesoStr = pesoField.getText().trim();
+				if (option == JOptionPane.OK_OPTION) {
+					String nombreNodo = nombreNodoField.getText().trim();
+					String nodoConectar = nodoConectarField.getText().trim();
+					String pesoStr = pesoField.getText().trim();
 
-		            // Validar nombre del nuevo nodo
-		            if (nombreNodo.isEmpty()) {
-		                JOptionPane.showMessageDialog(GrafoGUI.this, "Debe ingresar un nombre válido para el nuevo nodo.");
-		                return;
-		            }
-		            if (grafo.numVertice(nombreNodo) != -1) {
-		                JOptionPane.showMessageDialog(GrafoGUI.this, "El nombre del nodo ya existe.");
-		                return;
-		            }
+					// Validar nombre del nuevo nodo
+					if (nombreNodo.isEmpty()) {
+						JOptionPane.showMessageDialog(GrafoGUI.this,
+								"Debe ingresar un nombre válido para el nuevo nodo.");
+						return;
+					}
+					if (grafo.numVertice(nombreNodo) != -1) {
+						JOptionPane.showMessageDialog(GrafoGUI.this, "El nombre del nodo ya existe.");
+						return;
+					}
 
-		            // Validar nodo a conectar
-		            if (nodoConectar.isEmpty() || grafo.numVertice(nodoConectar) == -1) {
-		                JOptionPane.showMessageDialog(GrafoGUI.this, "Debe conectar el nuevo nodo a un nodo existente.");
-		                return;
-		            }
+					// Validar nodo a conectar
+					if (nodoConectar.isEmpty() || grafo.numVertice(nodoConectar) == -1) {
+						JOptionPane.showMessageDialog(GrafoGUI.this,
+								"Debe conectar el nuevo nodo a un nodo existente.");
+						return;
+					}
 
-		            // Validar peso
-		            int peso;
-		            try {
-		                peso = Integer.parseInt(pesoStr);
-		                if (peso <= 0) {
-		                    JOptionPane.showMessageDialog(GrafoGUI.this, "El peso debe ser un número positivo mayor que cero.");
-		                    return;
-		                }
-		            } catch (NumberFormatException ex) {
-		                JOptionPane.showMessageDialog(GrafoGUI.this, "Peso inválido. Debe ser un número.");
-		                return;
-		            }
+					// Validar peso
+					int peso;
+					try {
+						peso = Integer.parseInt(pesoStr);
+						if (peso <= 0) {
+							JOptionPane.showMessageDialog(GrafoGUI.this,
+									"El peso debe ser un número positivo mayor que cero.");
+							return;
+						}
+					} catch (NumberFormatException ex) {
+						JOptionPane.showMessageDialog(GrafoGUI.this, "Peso inválido. Debe ser un número.");
+						return;
+					}
 
-		            // Agregar el nuevo nodo y conectarlo
-		            grafo.nuevoVertice(nombreNodo);
-		            grafo.nuevoArco(nombreNodo, nodoConectar, peso);
+					// Agregar el nuevo nodo y conectarlo
+					grafo.nuevoVertice(nombreNodo);
+					grafo.nuevoArco(nombreNodo, nodoConectar, peso);
 
-		            // Actualizar la interfaz y resultados
-		            actualizarResultados("\n---------------------------------------\n");
-		            grafo.imprimirConsolaGrafo();
-		            actualizarResultados("Nodo agregado y conectado: " + nombreNodo + " -> " + nodoConectar + " con peso " + peso);
-		            mostrarRecorridoString();
-		            actualizarInterfaz();
-		            actualizarResultados(grafo.imprimirStringGrafo());
-		        }
-		    }
+					// Actualizar la interfaz y resultados
+					actualizarResultados("\n----------------------------------------------------\n");
+					grafo.imprimirConsolaGrafo();
+					actualizarResultados(
+							"Nodo agregado y conectado: " + nombreNodo + " -> " + nodoConectar + " con peso " + peso);
+					mostrarRecorridoString();
+					actualizarInterfaz();
+					actualizarResultados(grafo.imprimirStringGrafo());
+				}
+			}
 		});
-
 
 		unirNodoBtn.addActionListener(new ActionListener() {
-		    @Override
-		    public void actionPerformed(ActionEvent e) {
-		        JTextField nodoInicioField = new JTextField();
-		        JTextField nodoDestinoField = new JTextField();
-		        JTextField pesoField = new JTextField();
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JTextField nodoInicioField = new JTextField();
+				JTextField nodoDestinoField = new JTextField();
+				JTextField pesoField = new JTextField();
 
-		        Object[] message = {
-		            "Nodo Inicio:", nodoInicioField,
-		            "Nodo Destino:", nodoDestinoField,
-		            "Peso:", pesoField
-		        };
+				Object[] message = { "Nodo Inicio:", nodoInicioField, "Nodo Destino:", nodoDestinoField, "Peso:",
+						pesoField };
 
-		        int option = JOptionPane.showConfirmDialog(GrafoGUI.this, message, "Unir Nodos",
-		                JOptionPane.OK_CANCEL_OPTION);
+				int option = JOptionPane.showConfirmDialog(GrafoGUI.this, message, "Unir Nodos",
+						JOptionPane.OK_CANCEL_OPTION);
 
-		        if (option == JOptionPane.OK_OPTION) {
-		            String nodoInicio = nodoInicioField.getText().trim();
-		            String nodoDestino = nodoDestinoField.getText().trim();
-		            String pesoStr = pesoField.getText().trim();
+				if (option == JOptionPane.OK_OPTION) {
+					String nodoInicio = nodoInicioField.getText().trim();
+					String nodoDestino = nodoDestinoField.getText().trim();
+					String pesoStr = pesoField.getText().trim();
 
-		            // Validar nodos y peso
-		            if (nodoInicio.isEmpty() || nodoDestino.isEmpty() || pesoStr.isEmpty()) {
-		                JOptionPane.showMessageDialog(GrafoGUI.this, "Todos los campos son requeridos.");
-		                return;
-		            }
+					// Validar nodos y peso
+					if (nodoInicio.isEmpty() || nodoDestino.isEmpty() || pesoStr.isEmpty()) {
+						JOptionPane.showMessageDialog(GrafoGUI.this, "Todos los campos son requeridos.");
+						return;
+					}
 
-		            int peso;
-		            try {
-		                peso = Integer.parseInt(pesoStr);
-		                if (peso <= 0) {
-		                    JOptionPane.showMessageDialog(GrafoGUI.this,
-		                            "El peso debe ser un número positivo mayor que cero.");
-		                    return;
-		                }
-		            } catch (NumberFormatException ex) {
-		                JOptionPane.showMessageDialog(GrafoGUI.this, "Peso inválido. Debe ser un número.");
-		                return;
-		            }
+					int peso;
+					try {
+						peso = Integer.parseInt(pesoStr);
+						if (peso <= 0) {
+							JOptionPane.showMessageDialog(GrafoGUI.this,
+									"El peso debe ser un número positivo mayor que cero.");
+							return;
+						}
+					} catch (NumberFormatException ex) {
+						JOptionPane.showMessageDialog(GrafoGUI.this, "Peso inválido. Debe ser un número.");
+						return;
+					}
 
-		            try {
-		                grafo.nuevoArco(nodoInicio, nodoDestino, peso);
-		            } catch (IllegalArgumentException ex) {
-		                JOptionPane.showMessageDialog(GrafoGUI.this, ex.getMessage());
-		                return;
-		            }
+					try {
+						grafo.nuevoArco(nodoInicio, nodoDestino, peso);
+					} catch (IllegalArgumentException ex) {
+						JOptionPane.showMessageDialog(GrafoGUI.this, ex.getMessage());
+						return;
+					}
 
-		            actualizarResultados("\n---------------------------------------\n");
-		            grafo.imprimirConsolaGrafo(); // Imprimir el estado del grafo
-		            actualizarResultados("Arco agregado: " + nodoInicio + " -> " + nodoDestino + " con peso " + peso);
-		            mostrarRecorridoString();
-		            actualizarInterfaz();
-		            actualizarResultados(grafo.imprimirStringGrafo());
-		        }
-		    }
+					actualizarResultados("\n----------------------------------------------------\n");
+					grafo.imprimirConsolaGrafo(); // Imprimir el estado del grafo
+					actualizarResultados("Arco agregado: " + nodoInicio + " -> " + nodoDestino + " con peso " + peso);
+					mostrarRecorridoString();
+					actualizarInterfaz();
+					actualizarResultados(grafo.imprimirStringGrafo());
+				}
+			}
 		});
-
 
 		eliminarNodoBtn.addActionListener(new ActionListener() {
 			@Override
@@ -179,66 +176,61 @@ public class GrafoGUI extends JFrame {
 				}
 
 				grafo.eliminarVertice(nombreNodo);
-//************************************************************************************                
-                actualizarResultados("\n---------------------------------------\n");
+				actualizarResultados("\n----------------------------------------------------\n");
 				grafo.imprimirConsolaGrafo(); // Imprimir el estado del grafo
-                actualizarResultados("Nodo eliminado: " + nombreNodo);
-                mostrarRecorridoString();
-                actualizarInterfaz();
-                actualizarResultados(grafo.imprimirStringGrafo());
-//************************************************************************************                
+				actualizarResultados("Nodo eliminado: " + nombreNodo);
+				mostrarRecorridoString();
+				actualizarInterfaz();
+				actualizarResultados(grafo.imprimirStringGrafo());
 
 			}
 		});
 
 		eliminarArcoBtn.addActionListener(new ActionListener() {
-		    @Override
-		    public void actionPerformed(ActionEvent e) {
-		        JTextField nodoInicioField = new JTextField();
-		        JTextField nodoDestinoField = new JTextField();
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JTextField nodoInicioField = new JTextField();
+				JTextField nodoDestinoField = new JTextField();
 
-		        Object[] message = {
-		            "Nodo de Inicio:", nodoInicioField,
-		            "Nodo Destino:", nodoDestinoField
-		        };
+				Object[] message = { "Nodo de Inicio:", nodoInicioField, "Nodo Destino:", nodoDestinoField };
 
-		        int option = JOptionPane.showConfirmDialog(GrafoGUI.this, message, "Eliminar Arco",
-		                JOptionPane.OK_CANCEL_OPTION);
+				int option = JOptionPane.showConfirmDialog(GrafoGUI.this, message, "Eliminar Arco",
+						JOptionPane.OK_CANCEL_OPTION);
 
-		        if (option == JOptionPane.OK_OPTION) {
-		            String nodoInicio = nodoInicioField.getText().trim();
-		            String nodoDestino = nodoDestinoField.getText().trim();
+				if (option == JOptionPane.OK_OPTION) {
+					String nodoInicio = nodoInicioField.getText().trim();
+					String nodoDestino = nodoDestinoField.getText().trim();
 
-		            // Validar nodos
-		            if (nodoInicio.isEmpty() || nodoDestino.isEmpty()) {
-		                JOptionPane.showMessageDialog(GrafoGUI.this, "Ambos campos son requeridos.");
-		                return;
-		            }
+					// Validar nodos
+					if (nodoInicio.isEmpty() || nodoDestino.isEmpty()) {
+						JOptionPane.showMessageDialog(GrafoGUI.this, "Ambos campos son requeridos.");
+						return;
+					}
 
-		            try {
-		                grafo.eliminarArco(nodoInicio, nodoDestino);
-		            } catch (IllegalArgumentException ex) {
-		                JOptionPane.showMessageDialog(GrafoGUI.this, ex.getMessage());
-		                return;
-		            }
+					try {
+						grafo.eliminarArco(nodoInicio, nodoDestino);
+					} catch (IllegalArgumentException ex) {
+						JOptionPane.showMessageDialog(GrafoGUI.this, ex.getMessage());
+						return;
+					}
 
-		            actualizarResultados("\n---------------------------------------\n");
-		            grafo.imprimirConsolaGrafo(); // Imprimir el estado del grafo
-		            actualizarResultados("Arco eliminado: " + nodoInicio + " -> " + nodoDestino);
-		            mostrarRecorridoString();
-		            actualizarInterfaz();
-		            actualizarResultados(grafo.imprimirStringGrafo());
-		        }
-		    }
+					actualizarResultados("\n----------------------------------------------------\n");
+					grafo.imprimirConsolaGrafo(); // Imprimir el estado del grafo
+					actualizarResultados("Arco eliminado: " + nodoInicio + " -> " + nodoDestino);
+					mostrarRecorridoString();
+					actualizarInterfaz();
+					actualizarResultados(grafo.imprimirStringGrafo());
+				}
+			}
 		});
 
 		actualizarGrafoBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-                actualizarResultados("\n---------------------------------------\n");
+				actualizarResultados("\n----------------------------------------------------\n");
 				mostrarRecorridoString();
 				actualizarInterfaz();
-                actualizarResultados(grafo.imprimirStringGrafo());
+				actualizarResultados(grafo.imprimirStringGrafo());
 			}
 		});
 
@@ -264,8 +256,6 @@ public class GrafoGUI extends JFrame {
 		setVisible(true);
 	}
 
-
-	
 	private String pedirNodo(String mensaje) {
 		return JOptionPane.showInputDialog(GrafoGUI.this, mensaje);
 	}
@@ -275,61 +265,57 @@ public class GrafoGUI extends JFrame {
 	}
 
 	public void mostrarRecorridoString() {
-	    // Encontrar el árbol de expansión mínima usando el algoritmo de Prim
-	    ArbolExpansionMinimo prim = new ArbolExpansionMinimo(grafo);
-	    int costoTotal = prim.arbolExpansionPrim();
-	    arbolExpansionMinimo = prim.getAristasArbolExpansionMinimo();
+		// Encontrar el árbol de expansión mínima usando el algoritmo de Prim
+		ArbolExpansionMinimo prim = new ArbolExpansionMinimo(grafo);
+		int costoTotal = prim.arbolExpansionPrim();
+		arbolExpansionMinimo = prim.getAristasArbolExpansionMinimo();
 
-	    // Actualizar el panel de resultados
-	    StringBuilder resultado = new StringBuilder();
-	    resultado.append("Aristas del árbol de expansión mínima:\n");
-	    for (int[] arista : arbolExpansionMinimo) {
-	        String vertice1 = grafo.getVerts()[arista[0]].nomVertice();
-	        String vertice2 = grafo.getVerts()[arista[1]].nomVertice();
-	        resultado.append("V").append(vertice1).append(" -> V").append(vertice2).append("\n");
-	    }
-	    resultado.append("Costo total del árbol de expansión mínima: ").append(costoTotal).append("\n");
-	    actualizarResultados(resultado.toString());
+		// Actualizar el panel de resultados
+		StringBuilder resultado = new StringBuilder();
+		resultado.append("Aristas del árbol de expansión mínima:\n");
+		for (int[] arista : arbolExpansionMinimo) {
+			String vertice1 = grafo.getVerts()[arista[0]].nomVertice();
+			String vertice2 = grafo.getVerts()[arista[1]].nomVertice();
+			resultado.append("V").append(vertice1).append(" -> V").append(vertice2).append("\n");
+		}
+		resultado.append("Costo total del árbol de expansión mínima: ").append(costoTotal).append("\n");
+		actualizarResultados(resultado.toString());
 	}
-	
-	
+
 	private void actualizarInterfaz() {
 		// Encontrar el árbol de expansión mínima usando el algoritmo de Prim
 		ArbolExpansionMinimo prim = new ArbolExpansionMinimo(grafo);
 		int costoTotal = prim.arbolExpansionPrim();
 		arbolExpansionMinimo = prim.getAristasArbolExpansionMinimo();
 
-// *****************************************************************
 		// Imprimir en consola las aristas del árbol de expansión mínima
 		System.out.println("Aristas del árbol de expansión mínima:");
 		for (int[] arista : arbolExpansionMinimo) {
 			System.out.println("V" + arista[0] + " -> V" + arista[1]);
 		}
 		System.out.println("Costo total del árbol de expansión mínima: " + costoTotal);
-// ***************************************************************
 
 		// Actualizar los paneles
 		grafoPanel.setGrafo(grafo);
 		arbolPanel.setArbolExpansionMinimo(arbolExpansionMinimo);
 		grafoPanel.repaint();
 		arbolPanel.repaint();
-// ***************************************************************		
 		System.out.println("Grafo representado con matriz de pesos:");
 		grafo.imprimirConsolaGrafo();
-// ***************************************************************
-		
+
 	}
-// ***************************************************************
 
 // Método para actualizar los resultados en el panel de resultados
-    public void actualizarResultados(String resultados) {
-        resultadoPanel.actualizarResultados(resultados);
-    }
- // ***************************************************************
-	
+	public void actualizarResultados(String resultados) {
+		resultadoPanel.actualizarResultados(resultados);
+	}
+
 	public static void main(String[] args) {
+		// ***************************************************************
+		// Espacio para modificar el grafo por defecto
 		// Crear el grafo y añadir vértices (nodos)
-		GrafoMatriz grafo = new GrafoMatriz(15);
+		GrafoMatriz grafo = new GrafoMatriz(10);
+
 		// Añadir vértices
 		for (int i = 1; i <= 10; i++) {
 			grafo.nuevoVertice(String.valueOf(i));
@@ -338,46 +324,45 @@ public class GrafoGUI extends JFrame {
 		// Llamar a un método para establecer las conexiones entre los nodos (arcos)
 		establecerConexionesIniciales(grafo);
 
+		// ***************************************************************
+
 		// Encontrar el árbol de expansión mínima usando el algoritmo de Prim
 		ArbolExpansionMinimo prim = new ArbolExpansionMinimo(grafo);
 		int costoTotal = prim.arbolExpansionPrim();
 		List<int[]> arbolExpansionMinimo = prim.getAristasArbolExpansionMinimo();
 
-// ***************************************************************		
 		// Imprimir en consola las aristas del árbol de expansión mínima
 		System.out.println("Aristas del árbol de expansión mínima:");
 		for (int[] arista : arbolExpansionMinimo) {
 			System.out.println("V" + arista[0] + " -> V" + arista[1]);
 		}
 		System.out.println("Costo total del árbol de expansión mínima: " + costoTotal);
-// ***************************************************************
 
-		
 		// Crear y mostrar la interfaz gráfica
 		SwingUtilities.invokeLater(() -> new GrafoGUI(grafo, arbolExpansionMinimo));
 	}
 
 	private static void establecerConexionesIniciales(GrafoMatriz grafo) {
 		// Añadir arcos iniciales
-		grafo.nuevoArco("1", "2", 5);
-		grafo.nuevoArco("1", "4", 8);
-		grafo.nuevoArco("1", "3", 10);
-		grafo.nuevoArco("2", "4", 6);
-		grafo.nuevoArco("2", "6", 5);
-		grafo.nuevoArco("3", "4", 7);
-		grafo.nuevoArco("3", "5", 8);
-		grafo.nuevoArco("3", "8", 15);
-		grafo.nuevoArco("4", "5", 5);
-		grafo.nuevoArco("4", "6", 11);
-		grafo.nuevoArco("5", "7", 4);
-		grafo.nuevoArco("5", "8", 3);
-		grafo.nuevoArco("6", "7", 9);
-		grafo.nuevoArco("6", "9", 7);
-		grafo.nuevoArco("7", "8", 12);
-		grafo.nuevoArco("7", "9", 4);
-		grafo.nuevoArco("7", "10", 6);
-		grafo.nuevoArco("8", "10", 12);
-		grafo.nuevoArco("9", "10", 7);
-
+        // Añadir arcos
+        grafo.nuevoArco("1", "2", 5);
+        grafo.nuevoArco("1", "4", 8);
+        grafo.nuevoArco("1", "3", 10);
+        grafo.nuevoArco("2", "4", 6);
+        grafo.nuevoArco("2", "6", 5);
+        grafo.nuevoArco("3", "4", 7);
+        grafo.nuevoArco("3", "5", 8);
+        grafo.nuevoArco("3", "8", 15);
+        grafo.nuevoArco("4", "5", 5);
+        grafo.nuevoArco("4", "6", 11);
+        grafo.nuevoArco("5", "7", 4);
+        grafo.nuevoArco("5", "8", 3);
+        grafo.nuevoArco("6", "7", 9);
+        grafo.nuevoArco("6", "9", 7);
+        grafo.nuevoArco("7", "8", 12);
+        grafo.nuevoArco("7", "9", 4);
+        grafo.nuevoArco("7", "10", 6);
+        grafo.nuevoArco("8", "10", 12);
+        grafo.nuevoArco("9", "10", 7);
 	}
 }

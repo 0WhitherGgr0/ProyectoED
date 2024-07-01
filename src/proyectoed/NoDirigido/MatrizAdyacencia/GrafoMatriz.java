@@ -2,13 +2,14 @@ package proyectoed.NoDirigido.MatrizAdyacencia;
 
 
 public class GrafoMatriz {
+	//Atributos
     private int numVerts;
     private int maxVerts;
     private Vertice[] verts;
     private int[][] matPeso;
     private static final int INFINITO = Integer.MAX_VALUE;
     private StringBuilder resultado;
-
+    //Constructor
     public GrafoMatriz(int maxVerts) {
         this.maxVerts = maxVerts;
         this.numVerts = 0;
@@ -27,40 +28,35 @@ public class GrafoMatriz {
             }
         }
     }
-
+    //Metodos
     public void nuevoVertice(String nombre) {
         if (numVerts < maxVerts) {
             verts[numVerts] = new Vertice(nombre);
             numVerts++;
         } else {
-            throw new IllegalArgumentException("Se ha alcanzado el número máximo de vértices.");
+            throw new IndexOutOfBoundsException("Se ha alcanzado el número máximo de vértices.");
         }
     }
-
     public void nuevoArco(String inicio, String destino, int peso) {
         int vi = numVertice(inicio);
         int vd = numVertice(destino);
 
         if (vi == -1 || vd == -1) {
-            throw new IllegalArgumentException("Uno o ambos nodos no existen.");
+            throw new IndexOutOfBoundsException("Uno o ambos nodos no existen.");
         }
 
         matPeso[vi][vd] = peso;
         matPeso[vd][vi] = peso; // Para grafo no dirigido
     }
-
     public void eliminarArco(String inicio, String destino) {
         int vi = numVertice(inicio);
         int vd = numVertice(destino);
-
         if (vi == -1 || vd == -1) {
-            throw new IllegalArgumentException("Uno o ambos nodos no existen.");
+            throw new RuntimeException("Uno o ambos nodos no existen.");
         }
-
         matPeso[vi][vd] = INFINITO;
         matPeso[vd][vi] = INFINITO; // Para grafo no dirigido
     }
-
     public int numVertice(String nombre) {
         for (int i = 0; i < numVerts; i++) {
             if (verts[i].nomVertice().equals(nombre)) {
@@ -73,9 +69,8 @@ public class GrafoMatriz {
     public void eliminarVertice(String nombre) {
         int idx = numVertice(nombre);
         if (idx == -1) {
-            throw new IllegalArgumentException("El vértice no existe.");
+            throw new RuntimeException("El vértice no existe.");
         }
-
         // Desplazar las filas de la matriz de adyacencia
         for (int i = idx; i < numVerts - 1; i++) {
             for (int j = 0; j < numVerts; j++) {
@@ -88,19 +83,16 @@ public class GrafoMatriz {
                 matPeso[i][j] = matPeso[i][j + 1];
             }
         }
-
         // Restablecer la última fila y columna
         for (int i = 0; i < numVerts; i++) {
             matPeso[numVerts - 1][i] = INFINITO;
             matPeso[i][numVerts - 1] = INFINITO;
         }
-
         // Desplazar la lista de vértices
         for (int i = idx; i < numVerts - 1; i++) {
             verts[i] = verts[i + 1];
         }
         verts[numVerts - 1] = null;
-
         numVerts--;
     }
 
@@ -123,8 +115,6 @@ public class GrafoMatriz {
         System.out.println();
     }
 
-    // ******************************Segundo cambio**********************************
-
     public String imprimirStringGrafo() {
         resultado.setLength(0); // Clear previous results
         resultado.append("\nMatriz de Adyacencia:\n");
@@ -145,24 +135,17 @@ public class GrafoMatriz {
         resultado.append("\n");
         return resultado.toString(); // Return the built string
     }
-
-    public String getResultado() {
-        return resultado.toString();
-    }
-    
-    
-    public int[][] getMatPeso() {
-        return matPeso;
-    }
-
     public int numeroDeVertices() {
         return numVerts;
     }
-
+    
+    //Getters
+    public int[][] getMatPeso() {
+        return matPeso;
+    }
     public Vertice[] getVerts() {
         return verts;
     }
-
     public static int getInfinito() {
         return INFINITO;
     }

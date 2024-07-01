@@ -25,8 +25,40 @@ public class Demo {
 	        grafo.nuevoArco("5", "6", 4);
 	        grafo.nuevoArco("6", "1", 6);
 	        grafo.nuevoArco("6", "4", 5);
+	        
+	        
+	      	//Ejemplo de Recorrido 2 			
+
+	        GrafoMatriz grafo = new GrafoMatriz(10);
+
+	        // Añadir vértices
+	        grafo.nuevoVertice("H");
+	        grafo.nuevoVertice("J");
+	        grafo.nuevoVertice("Z");
+	        grafo.nuevoVertice("R");
+	        grafo.nuevoVertice("W");
+	        grafo.nuevoVertice("K");
+	        grafo.nuevoVertice("Y");
+	        grafo.nuevoVertice("T");
+	        grafo.nuevoVertice("L");
+	
+	        // Añadir arcos
+	        grafo.nuevoArco("H", "J", 3);
+	        grafo.nuevoArco("H", "Z", 2);
+	        grafo.nuevoArco("Z", "J", 4);
+	        grafo.nuevoArco("J", "R", 1);
+	        grafo.nuevoArco("Z", "W", 4);
+	        grafo.nuevoArco("W", "R", 1);
+	        grafo.nuevoArco("R", "K", 1);
+	        grafo.nuevoArco("R", "Y", 1);
+	        grafo.nuevoArco("Y", "K", 3);
+	        grafo.nuevoArco("K", "T", 4);
+	        grafo.nuevoArco("K", "L", 5);
+	        grafo.nuevoArco("L", "T", 2);
+	        grafo.nuevoArco("Y", "T", 5);
+	        
 */
-			//Ejemplo de Recorrido 2 			
+			//Ejemplo de Recorrido 3			
 
 		   GrafoMatriz grafo = new GrafoMatriz(10);
 

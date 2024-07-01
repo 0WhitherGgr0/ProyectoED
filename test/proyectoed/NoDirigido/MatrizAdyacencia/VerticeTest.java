@@ -6,14 +6,11 @@ import org.junit.jupiter.api.Test;
 
 class VerticeTest {
 
-	@Test
-	void testVertice() {
-		fail("Not yet implemented");
-	}
+	Vertice v = new Vertice("Nombre");
 
 	@Test
 	void testNomVertice() {
-		fail("Not yet implemented");
+		assertEquals("Nombre", v.nomVertice());
 	}
 
 }
