@@ -48,7 +48,9 @@ class ArbolExpansionMinimoTest {
 				+ "Matriz de Adyacencia:\n"
 				+ "0 1 3 \n"
 				+ "1 0 2 \n"
-				+ "3 2 0 \n", 
+				+ "3 2 0 \n"
+				+ "\nVertices:\n\n"
+				+ "1 2 3 \n", 
 				gm1.imprimirStringGrafo());
 		assertEquals(3, aem1.arbolExpansionPrim());
 		//Matriz de adyacencia de aem2
@@ -63,7 +65,9 @@ class ArbolExpansionMinimoTest {
 				+ "1 0 2 3 ∞ \n"
 				+ "3 2 0 ∞ 2 \n"
 				+ "2 3 ∞ 0 1 \n"
-				+ "3 ∞ 2 1 0 \n", 
+				+ "3 ∞ 2 1 0 \n"
+				+ "\nVertices:\n\n"
+				+ "1 2 3 4 5 \n", 
 				gm2.imprimirStringGrafo());
 		assertEquals(6, aem2.arbolExpansionPrim());
 	}

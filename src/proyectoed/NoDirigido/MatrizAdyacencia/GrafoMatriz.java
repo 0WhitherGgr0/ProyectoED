@@ -139,6 +139,11 @@ public class GrafoMatriz {
             }
             resultado.append("\n");
         }
+        resultado.append("\nVertices:\n\n");
+        for (int i = 0; i < numVerts; i++) {
+            resultado.append(verts[i].nomVertice()).append(" ");
+        }
+        resultado.append("\n");
         return resultado.toString(); // Return the built string
     }
     
