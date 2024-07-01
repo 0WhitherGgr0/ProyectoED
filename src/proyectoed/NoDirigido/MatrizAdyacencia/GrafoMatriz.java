@@ -69,7 +69,7 @@ public class GrafoMatriz {
     public void eliminarVertice(String nombre) {
         int idx = numVertice(nombre);
         if (idx == -1) {
-            throw new RuntimeException("El vértice no existe.");
+            throw new RuntimeException("El vertice no existe.");
         }
         // Desplazar las filas de la matriz de adyacencia
         for (int i = idx; i < numVerts - 1; i++) {
@@ -108,7 +108,7 @@ public class GrafoMatriz {
             }
             System.out.println();
         }
-        System.out.println("Nombres de los Vértices:");
+        System.out.println("Nombres de los Vertices:");
         for (int i = 0; i < numVerts; i++) {
             System.out.print(verts[i].nomVertice() + " ");
         }
@@ -128,7 +128,7 @@ public class GrafoMatriz {
             }
             resultado.append("\n");
         }
-        resultado.append("\nVértices:\n\n");
+        resultado.append("\nVertices:\n\n");
         for (int i = 0; i < numVerts; i++) {
             resultado.append(verts[i].nomVertice()).append(" ");
         }
@@ -149,6 +149,9 @@ public class GrafoMatriz {
     public static int getInfinito() {
         return INFINITO;
     }
+	public String getResultado() {
+		return resultado.toString();
+	}
 
 }
 
